@@ -18,7 +18,7 @@ function App({ cable }) {
   });
   return (
     <div className="App">
-      {/* <SignUp/> */}
+      <SignUp/>
       <Login />
     </div>
   );
