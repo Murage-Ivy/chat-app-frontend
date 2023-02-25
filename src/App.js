@@ -1,5 +1,6 @@
 import "./App.css";
 import Login from "./components/login/Login";
+import MessageForm from "./components/messageForm/MessageForm";
 import SignUp from "./components/signup/SignUp";
 
 function App({ cable }) {
@@ -18,8 +19,9 @@ function App({ cable }) {
   });
   return (
     <div className="App">
-      <SignUp/>
-      <Login />
+      {/* <SignUp />
+      <Login /> */}
+      <MessageForm />
     </div>
   );
 }

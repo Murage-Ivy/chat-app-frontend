@@ -1,0 +1,34 @@
+.message-form-group {
+  padding: 15px;
+}
+.message-form {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.type-message {
+  width: 100%;
+  height: 50px;
+  padding: 1px 20px;
+  border-radius: 4px 0px 0px 4px;
+  border: 1px solid #634caf;
+  border-right: 0px;
+  outline: #634caf;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.send-btn {
+  background-color: #634caf;
+  color: white;
+  padding: 12px 20px;
+  /* margin: 8px 0; */
+  border: none;
+  border-radius: 0px 4px 4px 0px;
+  cursor: pointer;
+  font-size: 16px;
+  height: 50px;
+  font-weight: bold;
+}
