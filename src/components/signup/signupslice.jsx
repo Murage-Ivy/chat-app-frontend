@@ -3,14 +3,17 @@ export const signupUser = (user, navigate) => {
     dispatch({ type: "loading/user" });
     const response = await fetch("http://localhost:3000/users", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "withCredentials": true },
+
       body: JSON.stringify(user),
     });
     const data = await response.json();
 
     if (response.ok) {
       dispatch({ type: "signup/user", payload: data });
-      navigate("/");
+      localStorage.setItem("session", data[1].session_id);
+      
+      navigate("/chatroom");
       console.log(data);
     } else {
       dispatch({ type: "error/user", payload: data.errors });

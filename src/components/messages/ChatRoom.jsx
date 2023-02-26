@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ActionCable from "actioncable";
 import MessageForm from "../messageForm/MessageForm";
 
@@ -12,7 +12,11 @@ function ChatRoom() {
     //createConsumer creates a persistent connection to the backend.
     //The connection is established when the component is mounted or rendered
     //and is closed when the component is unmounted or removed from the DOM.
-    const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
+    const cable = useRef;
+
+    if (!cable.current) {
+      cable.current = ActionCable.createConsumer("ws://localhost:3000/cable");
+    }
 
     const chatChannel = "MessageRoomChannel";
 
@@ -38,7 +42,14 @@ function ChatRoom() {
       },
     };
 
-    cable.subscriptions.create(chatChannel, handlers);
+    cable.current.subscriptions.create(chatChannel, handlers);
+
+    return function cleanUp() {
+      cable.current.subscriptions.remove(chatChannel);
+
+      cable.current = null;
+
+    }
   }, [messages]);
 
   function handleChange(e) {
@@ -64,9 +75,12 @@ function ChatRoom() {
     setMessage({ content: "", user_id: 1 });
   }
 
-  console.log(messages);
+  const messageList = messages.map(message => <div key={message.id}><span>{message.user}</span> <p>{message.content}</p></div>)
+
+  console.log(messages)
   return (
     <div className="chatRoom">
+      {messageList}
       <MessageForm
         handleChange={handleChange}
         handleSubmit={handleSubmit}
